@@ -15,6 +15,9 @@ export default class Home extends Component{
     handleAssignTask(){
         this.props.routeProps.history.push('/assignTask');
     }
+    handleContract(){
+        this.props.routeProps.history.push('/contracts');
+    }
 
     render(){
         console.log('into render');
@@ -22,6 +25,7 @@ export default class Home extends Component{
             <div>
                 <Button color='red' onClick={this.handleMyTasks}>My Tasks</Button>
                 <Button color='blue' onClick={this.handleAssignTask}>Assign Task</Button>
+                <Button color= 'orange'onClick={this.handleContract}>Contract</Button>
             </div>
         );
     }
