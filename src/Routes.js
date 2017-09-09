@@ -4,6 +4,7 @@ import {Menu} from 'semantic-ui-react';
 import Home from './Home';
 import 'semantic-ui-css/semantic.min.css';
 import * as firebase from 'firebase';
+import AssignTask from './AssignTask';
 
 
 export default class Routes extends Component{
@@ -17,6 +18,11 @@ export default class Routes extends Component{
     constructor(props){
         super(props);
         this.renderHome=this.renderHome.bind(this);
+        this.handleAssignTask = this.handleAssignTask.bind(this);
+        this.handleAuthChange = this.handleAuthChange.bind(this);
+        this.state ={
+            loggedIn : false
+        };
 }
 
 
@@ -39,7 +45,16 @@ authRedirectFail(result){
     console.log(result);
 }
 handleAuthChange(user){
-    console.log(user);
+    if(user){
+        this.setState(
+            {loggedIn : true }
+        );
+    }
+}
+
+
+handleAssignTask(props){
+return  (<AssignTask loggedInProp={this.state.loggedIn} routeProps={props}  />);
 }
 
     render(){
@@ -53,7 +68,8 @@ handleAuthChange(user){
           <Menu.Item name='signup'  onClick={this.handleGoogleLogin}>Google</Menu.Item>
           </Menu.Menu>
             </Menu>
-            <Route path='/home' render={this.renderHome} />
+            <Route exact path='/' render={this.renderHome} />
+            <Route path='/assignTask' render={this.handleAssignTask} />
                 </div>
             </BrowserRouter>
         );
