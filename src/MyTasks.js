@@ -25,17 +25,20 @@ export default class MyTasks extends Component{
 
     getTasks(){
         let allTasks=[];
+        let name='';
         allTasks=Object.keys(this.state.data).map((key)=>{
+            firebase.database().ref(this.state.data[key].from+'/profile/name').once('value',Name=>{
+                name=Name.val();
+            })
             return(
                 <Accordion styled>
                 <Accordion.Title>
                     <Icon name='dropdown' />
-                    What is a dog?
+                    {this.state.data[key].taskname}
                   </Accordion.Title>
                   <Accordion.Content>
                     <p>
-                      A dog is a type of domesticated animal. Known for its loyalty and faithfulness,
-                      {' '}it can be found as a welcome guest in many households across the world.
+                    From :{name}
                     </p>
                   </Accordion.Content>
                 </Accordion>
