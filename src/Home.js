@@ -9,7 +9,7 @@ export default class Home extends Component{
     }
 
     handleMyTasks(){
-        this.props.routeProps.history.push('/');
+        this.props.routeProps.history.push('/mytasks');
     }
 
     render(){
