@@ -6,10 +6,14 @@ export default class Home extends Component{
     constructor(props){
         super(props);
         this.handleMyTasks=this.handleMyTasks.bind(this);
+        this.handleAssignTask=this.handleAssignTask.bind(this);
     }
 
     handleMyTasks(){
         this.props.routeProps.history.push('/mytasks');
+    }
+    handleAssignTask(){
+        this.props.routeProps.history.push('/assignTask');
     }
 
     render(){
@@ -17,7 +21,7 @@ export default class Home extends Component{
         return(
             <div>
                 <Button color='red' onClick={this.handleMyTasks}>My Tasks</Button>
-                <Button color='blue'>Assign Task</Button>
+                <Button color='blue' onClick={this.handleAssignTask}>Assign Task</Button>
             </div>
         );
     }

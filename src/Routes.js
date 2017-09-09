@@ -5,6 +5,7 @@ import Home from './Home';
 import 'semantic-ui-css/semantic.min.css';
 import * as firebase from 'firebase';
 import MyTasks from './MyTasks';
+import AssignTask from './AssignTask';
 
 
 export default class Routes extends Component{
@@ -23,6 +24,11 @@ export default class Routes extends Component{
         this.renderHome=this.renderHome.bind(this);
         this.handleAuthChange=this.handleAuthChange.bind(this);
         this.renderMyTasks=this.renderMyTasks.bind(this);
+        this.handleAssignTask = this.handleAssignTask.bind(this);
+        this.handleAuthChange = this.handleAuthChange.bind(this);
+        this.state ={
+            loggedIn : false
+        };
 }
 
 
@@ -57,6 +63,11 @@ renderMyTasks(){
     );
 }
 
+
+handleAssignTask(props){
+return  (<AssignTask loggedInProp={this.state.loggedIn} routeProps={props}  />);
+}
+
     render(){
         return(
             <BrowserRouter>
@@ -70,6 +81,7 @@ renderMyTasks(){
             </Menu>
             <Route exact path='/' render={this.renderHome} />
             <Route path='/MyTasks' render={this.renderMyTasks}/>
+            <Route path='/assignTask' render={this.handleAssignTask} />
                 </div>
             </BrowserRouter>
         );
