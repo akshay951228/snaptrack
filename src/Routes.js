@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css';
 import * as firebase from 'firebase';
 import MyTasks from './MyTasks';
 import AssignTask from './AssignTask';
-
+//import Contract from './Contract'
 
 export default class Routes extends Component{
 
@@ -29,15 +29,35 @@ export default class Routes extends Component{
         this.state ={
             loggedIn : false
         };
-}
+    }
 
 
-handleGoogleLogin(){
-    let provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider);
-}
+    handleGoogleLogin(){
+        let provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithRedirect(provider);
+    }
 
 
+<<<<<<< HEAD
+    componentDidMount(){
+        firebase.auth().getRedirectResult().then(this.authRedirectSuccess).catch(this.authRedirectFail);
+        
+        firebase.auth().onAuthStateChanged(this.handleAuthChange);
+        
+    }
+    authRedirectSuccess(result){
+        console.log(result);
+    }
+    authRedirectFail(result){
+        console.log(result);
+    }
+    handleAuthChange(user){
+        if(user)
+        this.setState({
+            loggedIn:true
+        });
+    }
+=======
 componentDidMount(){
     firebase.auth().getRedirectResult().then(this.authRedirectSuccess).catch(this.authRedirectFail);
     
@@ -56,17 +76,21 @@ handleAuthChange(user){
     }
     
 }
+>>>>>>> b588e2f77010f6a2da41f2622f0924a8d1e2110a
 
-renderMyTasks(){
-    return(
-        <MyTasks loggedIn={this.state.loggedIn}/>
-    );
-}
+    renderMyTasks(){
+        return(
+            <MyTasks loggedIn={this.state.loggedIn}/>
+        );
+    }
 
 
-handleAssignTask(props){
-return  (<AssignTask loggedInProp={this.state.loggedIn} routeProps={props}  />);
-}
+    handleAssignTask(props){
+    return  (<AssignTask loggedInProp={this.state.loggedIn} routeProps={props}  />);
+    }
+    // handleContract(props){
+    //     return (<Contract routeProps={props}/>);
+    // }
 
     render(){
         return(
@@ -82,6 +106,7 @@ return  (<AssignTask loggedInProp={this.state.loggedIn} routeProps={props}  />);
             <Route exact path='/' render={this.renderHome} />
             <Route path='/MyTasks' render={this.renderMyTasks}/>
             <Route path='/assignTask' render={this.handleAssignTask} />
+            
                 </div>
             </BrowserRouter>
         );
