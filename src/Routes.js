@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {BrowserRouter,Route} from 'react-router-dom';
+import {BrowserRouter,Route,Link} from 'react-router-dom';
 import {Menu} from 'semantic-ui-react';
 import Home from './Home';
 import 'semantic-ui-css/semantic.min.css';
@@ -44,17 +44,17 @@ componentDidMount(){
     firebase.auth().onAuthStateChanged(this.handleAuthChange);
     
 }
-authRedirectSuccess(result){
-    console.log(result);
-}
 authRedirectFail(result){
     console.log(result);
 }
 handleAuthChange(user){
-    if(user)
-    this.setState({
-        loggedIn:true
-    });
+    if(user){
+        this.setState({
+            loggedIn:true
+        });
+        firebase.database().ref(user.uid+'/profile').set({name:user.displayName,email:user.email,photo:user.photoURL});
+    }
+    
 }
 
 renderMyTasks(){
@@ -73,7 +73,7 @@ return  (<AssignTask loggedInProp={this.state.loggedIn} routeProps={props}  />);
             <BrowserRouter>
                 <div>
                 <Menu>
-        <Menu.Item name='SnapTrack' header>SNAPTRACK</Menu.Item>
+       <Link to='/'> <Menu.Item name='SnapTrack' header>SNAPTRACK</Menu.Item></Link>
         <Menu.Menu position='right'>
             
           <Menu.Item name='signup'  onClick={this.handleGoogleLogin}>Google</Menu.Item>
