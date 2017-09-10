@@ -22,7 +22,9 @@ export default class Routes extends Component{
     constructor(props){
         super(props);
         this.state={
-            loggedIn:false
+            loggedIn:false,
+            currentUser:null,
+            signInText:'SignIn'
         }
         this.renderHome=this.renderHome.bind(this);
         this.handleAuthChange=this.handleAuthChange.bind(this);
@@ -30,15 +32,18 @@ export default class Routes extends Component{
         this.handleAssignTask = this.handleAssignTask.bind(this);
         this.handleAuthChange = this.handleAuthChange.bind(this);
         this.renderGivenTasks=this.renderGivenTasks.bind(this);
-        this.state ={
-            loggedIn : false
-        };
+        this.handleGoogleLogin=this.handleGoogleLogin.bind(this);
     }
 
 
     handleGoogleLogin(){
-        let provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider);
+        if(this.state.signInText === 'SignIn'){
+            let provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
+        }
+       else{
+        firebase.auth().signOut();
+       }  
     }
 
 
@@ -49,12 +54,20 @@ export default class Routes extends Component{
     }
 
     handleAuthChange(user){
-        if(user)
-        this.setState({
-            loggedIn:true,
-            currentUser:user
-        });
-        console.log('user came in')
+        if(user){
+            this.setState({
+                loggedIn:true,
+                currentUser:user,
+                signInText:'LogOut'
+            });
+        }
+        else{
+            this.setState({
+                loggedIn:false,
+                currentUser:null,
+                signInText:'SignIn'
+            });
+        }
     }
 
     renderMyTasks(props){
@@ -87,7 +100,7 @@ export default class Routes extends Component{
        <Link to='/contracts'><Menu.Item name='Contracts' header>Contracts</Menu.Item></Link>
         <Menu.Menu position='right'>
             
-          <Menu.Item name='signup'  onClick={this.handleGoogleLogin}>Google</Menu.Item>
+          <Menu.Item name='signup'  onClick={this.handleGoogleLogin}>{this.state.signInText}</Menu.Item>
           </Menu.Menu>
             </Menu>
             <Route exact path='/' render={this.renderHome} />
