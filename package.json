@@ -49,11 +49,7 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "axios": "^0.16.2",
-=======
     "bip39": "^2.4.0",
->>>>>>> a70a5a8ca4c42b2ff344156d51140f256aba04dc
     "dotenv": "^2.0.0",
     "ethereumjs-wallet": "^0.6.0",
     "firebase": "^4.3.1",
@@ -63,12 +59,8 @@
     "react-router-dom": "^4.2.2",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.72.0",
-<<<<<<< HEAD
-    "slick-carousel": "^1.7.1"
-=======
     "web3": "^1.0.0-beta.18",
     "web3-provider-engine": "^13.2.9"
->>>>>>> a70a5a8ca4c42b2ff344156d51140f256aba04dc
   },
   "scripts": {
     "start": "node scripts/start.js",
