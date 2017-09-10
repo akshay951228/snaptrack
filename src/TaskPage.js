@@ -45,17 +45,18 @@ export default class TaskPage extends Component{
     }
 
     getImages(){
-       let allImages=this.state.screenShots.map((image)=>{
+        if(this.state.screenShots)
+       {let allImages=this.state.screenShots.map((image)=>{
             return <div key={image}><Image src={image} style={{height:'50px',width:'50px'}}/><br /></div>
         })
-        return allImages;
+        return allImages;}
     }
 
     uploadImages(){
         let target=this.state.data.from;
         let today= new Date();
         firebase.database().ref(target+'/assigned/'+this.currentTask+'/images/'+today).set(this.state.screenShots).then(()=>{
-            this.setState({openCamera:false,screenShots:null});
+            this.setState({camera:false,screenShots:null});
         });
     }
     
@@ -74,7 +75,7 @@ export default class TaskPage extends Component{
                       <h3>Take a snap!</h3>
                       </Grid.Column>
                        <Grid.Column  mobile={16} tablet={10} computer={8}>
-                       <Button color='green' onClick={this.openCamera}>Start Camera</Button>
+                      {!this.state.camera &&  <Button color='green' onClick={this.openCamera}>Start Camera</Button>}
                       </Grid.Column>
                     
                       <Grid.Column  mobile={16} tablet={10} computer={8}>

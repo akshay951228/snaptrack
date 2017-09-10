@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import * as firebase from 'firebase';
 import {Grid,Button} from 'semantic-ui-react';
 
-export default class Assigned extends Component{
+export default class GivenTasks extends Component{
 
     constructor(props){
         super(props);
@@ -37,7 +37,7 @@ export default class Assigned extends Component{
     }
 
     handleTask(key){
-        this.props.routeProps.history.push('/assignpage/'+key);
+        this.props.routeProps.history.push('/assignedpage/'+key);
     }
 
     render(){
