@@ -8,7 +8,7 @@ import MyTasks from './MyTasks';
 import AssignTask from './AssignTask';
 import Contract from './Contract';
 import TaskPage from './TaskPage';
-import Assigned from './Assigned';
+import GivenTasks from './GivenTasks';
 import AssignedPage from './AssignedPage';
 
 export default class Routes extends Component{
@@ -22,23 +22,28 @@ export default class Routes extends Component{
     constructor(props){
         super(props);
         this.state={
-            loggedIn:false
+            loggedIn:false,
+            currentUser:null,
+            signInText:'SignIn'
         }
         this.renderHome=this.renderHome.bind(this);
         this.handleAuthChange=this.handleAuthChange.bind(this);
         this.renderMyTasks=this.renderMyTasks.bind(this);
         this.handleAssignTask = this.handleAssignTask.bind(this);
         this.handleAuthChange = this.handleAuthChange.bind(this);
-        this.renderAssignedTasks=this.renderAssignedTasks.bind(this);
-        this.state ={
-            loggedIn : false
-        };
+        this.renderGivenTasks=this.renderGivenTasks.bind(this);
+        this.handleGoogleLogin=this.handleGoogleLogin.bind(this);
     }
 
 
     handleGoogleLogin(){
-        let provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider);
+        if(this.state.signInText === 'SignIn'){
+            let provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
+        }
+       else{
+        firebase.auth().signOut();
+       }  
     }
 
 <<<<<<< HEAD
@@ -52,6 +57,7 @@ export default class Routes extends Component{
     }
 
     handleAuthChange(user){
+<<<<<<< HEAD
 <<<<<<< HEAD
         if(user){
             this.setState({
@@ -70,11 +76,27 @@ export default class Routes extends Component{
 =======
         console.log('user came in')
 >>>>>>> 2b7d302b8757db3880d2c9ab37455c239e0adecb
+=======
+        if(user){
+            this.setState({
+                loggedIn:true,
+                currentUser:user,
+                signInText:'LogOut'
+            });
+        }
+        else{
+            this.setState({
+                loggedIn:false,
+                currentUser:null,
+                signInText:'SignIn'
+            });
+        }
+>>>>>>> 099a380da46e66d7d9008c047a68c9ea67972186
     }
 
     renderMyTasks(props){
         return(
-            <MyTasks loggedIn={this.state.loggedIn} routeProps={props}/>
+            <MyTasks loggedIn={this.state.loggedIn} currentUser={this.state.user} routeProps={props}/>
         );
     }
 
@@ -86,8 +108,8 @@ export default class Routes extends Component{
         return <Contract routeProps={props}/>;
     }
 
-    renderAssignedTasks(props){
-        return(<Assigned routeProps={props} loggedInProp={this.state.loggedIn} />);
+    renderGivenTasks(props){
+        return(<GivenTasks routeProps={props} loggedIn={this.state.loggedIn} />);
     }
 
     render(){
@@ -96,9 +118,13 @@ export default class Routes extends Component{
                 <div>
                 <Menu>
        <Link to='/'> <Menu.Item name='SnapTrack' header>SNAPTRACK</Menu.Item></Link>
+       <Link to='/mytasks'><Menu.Item name='mytasks' header>My tasks</Menu.Item></Link>
+       <Link to='/assigntask'><Menu.Item name='AssignTask' header>Assign Tasks</Menu.Item></Link>
+       <Link to='/giventasks'><Menu.Item name='GivenTasks' header>Given Tasks</Menu.Item></Link>
+       <Link to='/contracts'><Menu.Item name='Contracts' header>Contracts</Menu.Item></Link>
         <Menu.Menu position='right'>
             
-          <Menu.Item name='signup'  onClick={this.handleGoogleLogin}>Google</Menu.Item>
+          <Menu.Item name='signup'  onClick={this.handleGoogleLogin}>{this.state.signInText}</Menu.Item>
           </Menu.Menu>
             </Menu>
             <Route exact path='/' render={this.renderHome} />
@@ -106,7 +132,7 @@ export default class Routes extends Component{
             <Route path='/assignTask' render={this.handleAssignTask} />
             <Route path='/contracts' render={this.handleContract}/>
             <Route path='/taskpage/:assign' component={TaskPage}/>
-            <Route path='/assigned' render={this.renderAssignedTasks}/>
+            <Route path='/giventasks' render={this.renderGivenTasks}/>
             <Route path='/assignedpage/:key' component={AssignedPage}/>
                 </div>
             </BrowserRouter>

@@ -1,33 +1,11 @@
 import React,{Component} from 'react';
-import {Button} from 'semantic-ui-react';
 
 export default class Home extends Component{
-
-    constructor(props){
-        super(props);
-        this.handleMyTasks=this.handleMyTasks.bind(this);
-        this.handleAssignTask=this.handleAssignTask.bind(this);
-        this.handleContract = this.handleContract.bind(this);
-        this.handleAssigned=this.handleAssigned.bind(this);
-    }
-
-    handleMyTasks(){
-        this.props.routeProps.history.push('/mytasks');
-    }
-    handleAssignTask(){
-        this.props.routeProps.history.push('/assignTask');
-    }
-    handleContract(){
-        this.props.routeProps.history.push('/contracts');
-    }
-
-    handleAssigned(){
-        this.props.routeProps.history.push('/assigned');
-    }
 
     render(){
         return(
             <div>
+<<<<<<< HEAD
                 <Button color='red' onClick={this.handleMyTasks}>My Tasks</Button>
                 <Button color='blue' onClick={this.handleAssignTask}>Assign Task</Button>
 <<<<<<< HEAD
@@ -36,6 +14,9 @@ export default class Home extends Component{
                 <Button color='orange'onClick={this.handleContract}>Contract</Button>
                 <Button color='black' onClick={this.handleAssigned}>Assiged</Button>
 >>>>>>> 2b7d302b8757db3880d2c9ab37455c239e0adecb
+=======
+                <h1>Welcome to SnapTrack!</h1>
+>>>>>>> 099a380da46e66d7d9008c047a68c9ea67972186
             </div>
         );
     }
