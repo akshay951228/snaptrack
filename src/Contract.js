@@ -20,7 +20,7 @@ export default class Contract extends Component{
           this.setState({
             web3: results.web3
           })
-    
+          
           // Instantiate contract once web3 provided.
           this.instantiateContract()
         })
@@ -28,8 +28,9 @@ export default class Contract extends Component{
           console.log('Error finding web3.')
         })
       }
+      
       instantiateContract() {
-        
+       
     
         const contract = require('truffle-contract')
         const personalProject = contract(PersonalProject);
@@ -42,13 +43,13 @@ export default class Contract extends Component{
                 
                 personalProject.deployed().then((instance) => {
                     contractInstance = instance;
-                    
                 return contractInstance.publishAContract('akshay','kumar', {from: accounts[0]})
               }).then((result) => {
                 console.log(result);
                 return contractInstance.showUserContract.call('akshay',accounts[0])
               }).then((result) => {
                 // Update state with the result.
+                debugger;
                 return this.setState({ data: result })
               })
             })
