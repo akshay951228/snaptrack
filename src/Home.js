@@ -8,6 +8,7 @@ export default class Home extends Component{
         this.handleMyTasks=this.handleMyTasks.bind(this);
         this.handleAssignTask=this.handleAssignTask.bind(this);
         this.handleContract = this.handleContract.bind(this);
+        this.handleAssigned=this.handleAssigned.bind(this);
     }
 
     handleMyTasks(){
@@ -20,12 +21,17 @@ export default class Home extends Component{
         this.props.routeProps.history.push('/contracts');
     }
 
+    handleAssigned(){
+        this.props.routeProps.history.push('/assigned');
+    }
+
     render(){
         return(
             <div>
                 <Button color='red' onClick={this.handleMyTasks}>My Tasks</Button>
                 <Button color='blue' onClick={this.handleAssignTask}>Assign Task</Button>
                 <Button color='orange'onClick={this.handleContract}>Contract</Button>
+                <Button color='black' onClick={this.handleAssigned}>Assiged</Button>
             </div>
         );
     }
