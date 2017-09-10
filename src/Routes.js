@@ -39,10 +39,7 @@ export default class Routes extends Component{
     }
 
 
-<<<<<<< HEAD
     
-=======
->>>>>>> 7f9f8a7f258579d2e38a2c6295fd6809d85ae5d2
     componentDidMount(){
         firebase.auth().getRedirectResult().then(this.authRedirectSuccess).catch(this.authRedirectFail);
         
@@ -51,20 +48,10 @@ export default class Routes extends Component{
     }
 
     handleAuthChange(user){
-<<<<<<< HEAD
-        if(user){
-            this.setState({
-                loggedIn:true
-            });
-            firebase.database().ref(user.uid+'/profile').set({name:user.displayName,email:user.email,photo:user.photoURL});
-        }
-        
-=======
         if(user)
         this.setState({
             loggedIn:true
         });
->>>>>>> 7f9f8a7f258579d2e38a2c6295fd6809d85ae5d2
     }
 
     renderMyTasks(){
