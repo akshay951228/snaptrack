@@ -25,7 +25,7 @@ export default class Home extends Component{
             <div>
                 <Button color='red' onClick={this.handleMyTasks}>My Tasks</Button>
                 <Button color='blue' onClick={this.handleAssignTask}>Assign Task</Button>
-                <Button color= 'orange'onClick={this.handleContract}>Contract</Button>
+                <Button color='orange'onClick={this.handleContract}>Contract</Button>
             </div>
         );
     }

@@ -38,7 +38,6 @@ export default class Routes extends Component{
     }
 
 
-<<<<<<< HEAD
     componentDidMount(){
         firebase.auth().getRedirectResult().then(this.authRedirectSuccess).catch(this.authRedirectFail);
         
@@ -57,26 +56,6 @@ export default class Routes extends Component{
             loggedIn:true
         });
     }
-=======
-componentDidMount(){
-    firebase.auth().getRedirectResult().then(this.authRedirectSuccess).catch(this.authRedirectFail);
-    
-    firebase.auth().onAuthStateChanged(this.handleAuthChange);
-    
-}
-authRedirectFail(result){
-    console.log(result);
-}
-handleAuthChange(user){
-    if(user){
-        this.setState({
-            loggedIn:true
-        });
-        firebase.database().ref(user.uid+'/profile').set({name:user.displayName,email:user.email,photo:user.photoURL});
-    }
-    
-}
->>>>>>> b588e2f77010f6a2da41f2622f0924a8d1e2110a
 
     renderMyTasks(){
         return(
