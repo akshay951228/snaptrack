@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import * as firebase from 'firebase';
 import {Grid,Image} from 'semantic-ui-react';
+var Carousel=require('react-responsive-carousel').Carousel;
 
 export default class AssignedPage extends Component{
 
@@ -28,7 +29,10 @@ export default class AssignedPage extends Component{
         if(this.state.data){
             return Object.keys(this.state.data.images).map((day)=>{
                 return Object.keys(this.state.data.images[day]).map((image)=>{
-                    return <div><Image src={this.state.data.images[day][image]} style={{height:'70px', width:'70px'}}/></div>
+                    return <div>
+                            <img src={this.state.data.images[day][image]}/>
+                            <p className="legend">{day}</p>
+                            </div>
                 });
                   
             })
@@ -54,7 +58,7 @@ export default class AssignedPage extends Component{
                       </Grid.Column>
                     
                       <Grid.Column  mobile={16} tablet={10} computer={8}>
-                    {this.state.data.images && Images}
+                   <Carousel showArrows={true} > {this.state.data.images && Images}</Carousel>
                       
                       </Grid.Column>
                       <Grid.Column  mobile={16} tablet={10} computer={8}>

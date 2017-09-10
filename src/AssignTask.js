@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { Form ,Button} from 'semantic-ui-react'
 import * as firebase from 'firebase';
+import axios from 'axios';
 
 
 export default class AssignTask extends Component{
@@ -25,8 +26,17 @@ export default class AssignTask extends Component{
         .then(()=>{
             firebase.database().ref(targetUser+'/mytasks').child(newKey).update({taskname:taskname,from:user.uid});
         });
-
+        firebase.database().ref('currentNonce').once('value',snap=>{
+            this.current_nonce=snap.val();
+        })
         
+        let url= 'https://us-central1-bestof-78fcd.cloudfunctions.net/snapTrack';
+        axios.get(url,{params:{
+            taskname: taskname,
+            from:user.uid,
+            to:targetUser,
+            current_nonce:++this.current_nonce
+        }},{crossdomain:true});
 
 
     }
