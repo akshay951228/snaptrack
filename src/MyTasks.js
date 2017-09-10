@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import * as firebase from 'firebase';
 import {Button,Grid} from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
 
 
 export default class MyTasks extends Component{
@@ -14,13 +13,14 @@ export default class MyTasks extends Component{
             currentKey:null
         }
         this.getTasks=this.getTasks.bind(this);
+        this.handleTask=this.handleTask.bind(this);
         
     }
 
     componentDidMount(){
-        let user=firebase.auth().currentUser;
+        
         if(this.props.loggedIn)
-            {
+            {   let user=firebase.auth().currentUser;
                 firebase.database().ref(user.uid+'/mytasks').on('value',dataSnap=>{
                     if(dataSnap.val())
                         this.setState({data:dataSnap.val()});
@@ -28,13 +28,16 @@ export default class MyTasks extends Component{
             }
     }
    
+    handleTask(key){
+        this.props.routeProps.history.push('/taskpage/'+key);
+    }
 
     getTasks(){
         let allTasks=[];
         allTasks=Object.keys(this.state.data).map((key)=>{
             return(
                 <div key={key}>
-                   <Link to={'/taskpage/'}><Button primary > {this.state.data[key].taskname}</Button></Link><br/><br/>
+                   <Button primary onClick={()=>{this.handleTask(key)}}> {this.state.data[key].taskname}</Button><br/><br/>
                    </div>
                         
             );

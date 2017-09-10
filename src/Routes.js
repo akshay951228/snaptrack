@@ -8,6 +8,8 @@ import MyTasks from './MyTasks';
 import AssignTask from './AssignTask';
 import Contract from './Contract';
 import TaskPage from './TaskPage';
+import Assigned from './Assigned';
+import AssignedPage from './AssignedPage';
 
 export default class Routes extends Component{
 
@@ -27,6 +29,7 @@ export default class Routes extends Component{
         this.renderMyTasks=this.renderMyTasks.bind(this);
         this.handleAssignTask = this.handleAssignTask.bind(this);
         this.handleAuthChange = this.handleAuthChange.bind(this);
+        this.renderAssignedTasks=this.renderAssignedTasks.bind(this);
         this.state ={
             loggedIn : false
         };
@@ -38,15 +41,18 @@ export default class Routes extends Component{
         firebase.auth().signInWithRedirect(provider);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b7d302b8757db3880d2c9ab37455c239e0adecb
     
     componentDidMount(){
         firebase.auth().getRedirectResult().then(this.authRedirectSuccess).catch(this.authRedirectFail);
-        
         firebase.auth().onAuthStateChanged(this.handleAuthChange);
-        
     }
 
     handleAuthChange(user){
+<<<<<<< HEAD
         if(user){
             this.setState({
                 loggedIn:true
@@ -54,15 +60,21 @@ export default class Routes extends Component{
             firebase.database().ref(user.uid+'/profile').set({name:user.displayName,email:user.email,photo:user.photoURL});
         }
         
+=======
+>>>>>>> 2b7d302b8757db3880d2c9ab37455c239e0adecb
         if(user)
         this.setState({
             loggedIn:true
         });
+<<<<<<< HEAD
+=======
+        console.log('user came in')
+>>>>>>> 2b7d302b8757db3880d2c9ab37455c239e0adecb
     }
 
-    renderMyTasks(){
+    renderMyTasks(props){
         return(
-            <MyTasks loggedIn={this.state.loggedIn}/>
+            <MyTasks loggedIn={this.state.loggedIn} routeProps={props}/>
         );
     }
 
@@ -72,6 +84,10 @@ export default class Routes extends Component{
     }
     handleContract(props){
         return <Contract routeProps={props}/>;
+    }
+
+    renderAssignedTasks(props){
+        return(<Assigned routeProps={props} loggedInProp={this.state.loggedIn} />);
     }
 
     render(){
@@ -89,7 +105,9 @@ export default class Routes extends Component{
             <Route path='/MyTasks' render={this.renderMyTasks}/>
             <Route path='/assignTask' render={this.handleAssignTask} />
             <Route path='/contracts' render={this.handleContract}/>
-            <Route path='/task/:assign' component={TaskPage}/>
+            <Route path='/taskpage/:assign' component={TaskPage}/>
+            <Route path='/assigned' render={this.renderAssignedTasks}/>
+            <Route path='/assignedpage/:key' component={AssignedPage}/>
                 </div>
             </BrowserRouter>
         );
