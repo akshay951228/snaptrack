@@ -1,15 +1,20 @@
 import React,{Component} from 'react';
 import * as firebase from 'firebase';
-import {Accordion,Icon,Grid} from 'semantic-ui-react';
+import {Button,Grid} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
+
 
 export default class MyTasks extends Component{
 
     constructor(props){
         super(props);
         this.state={
-            data:null
+            data:null,
+            cameraOpen:false,
+            currentKey:null
         }
         this.getTasks=this.getTasks.bind(this);
+        
     }
 
     componentDidMount(){
@@ -22,26 +27,16 @@ export default class MyTasks extends Component{
                 })
             }
     }
+   
 
     getTasks(){
         let allTasks=[];
-        let name='';
         allTasks=Object.keys(this.state.data).map((key)=>{
-            firebase.database().ref(this.state.data[key].from+'/profile/name').once('value',Name=>{
-                name=Name.val();
-            })
             return(
-                <Accordion styled>
-                <Accordion.Title>
-                    <Icon name='dropdown' />
-                    {this.state.data[key].taskname}
-                  </Accordion.Title>
-                  <Accordion.Content>
-                    <p>
-                    From :{name}
-                    </p>
-                  </Accordion.Content>
-                </Accordion>
+                <div key={key}>
+                   <Link to={'/taskpage/'}><Button primary > {this.state.data[key].taskname}</Button></Link><br/><br/>
+                   </div>
+                        
             );
         });
         return allTasks;
@@ -72,6 +67,7 @@ export default class MyTasks extends Component{
                     </div>
                 }
             </div>
+                
         );
     }
 }

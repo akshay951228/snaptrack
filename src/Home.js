@@ -7,6 +7,7 @@ export default class Home extends Component{
         super(props);
         this.handleMyTasks=this.handleMyTasks.bind(this);
         this.handleAssignTask=this.handleAssignTask.bind(this);
+        this.handleContract = this.handleContract.bind(this);
     }
 
     handleMyTasks(){
@@ -20,12 +21,11 @@ export default class Home extends Component{
     }
 
     render(){
-        console.log('into render');
         return(
             <div>
                 <Button color='red' onClick={this.handleMyTasks}>My Tasks</Button>
                 <Button color='blue' onClick={this.handleAssignTask}>Assign Task</Button>
-                <Button color= 'orange'onClick={this.handleContract}>Contract</Button>
+                <Button color='orange' onClick={this.handleContract}>Contract</Button>
             </div>
         );
     }
