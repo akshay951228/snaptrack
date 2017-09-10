@@ -54,6 +54,21 @@ export default class Routes extends Component{
     }
 
     handleAuthChange(user){
+
+        if(user){
+            this.setState({
+                loggedIn:true
+            });
+            firebase.database().ref(user.uid+'/profile').set({name:user.displayName,email:user.email,photo:user.photoURL});
+        }
+        
+
+        if(user)
+        this.setState({
+            loggedIn:true
+        });
+        console.log('user came in')
+
         if(user){
             this.setState({
                 loggedIn:true,
@@ -68,6 +83,7 @@ export default class Routes extends Component{
                 signInText:'SignIn'
             });
         }
+
     }
 
     renderMyTasks(props){
