@@ -49,13 +49,17 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
+    "bip39": "^2.4.0",
     "dotenv": "^2.0.0",
+    "ethereumjs-wallet": "^0.6.0",
     "firebase": "^4.3.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router-dom": "^4.2.2",
     "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.72.0"
+    "semantic-ui-react": "^0.72.0",
+    "web3": "^1.0.0-beta.18",
+    "web3-provider-engine": "^13.2.9"
   },
   "scripts": {
     "start": "node scripts/start.js",

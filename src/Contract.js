@@ -42,13 +42,12 @@ export default class Contract extends Component{
                 
                 personalProject.deployed().then((instance) => {
                     contractInstance = instance;
-                // Stores a given value, 5 by default.
-                return contractInstance.publishAContract('akshay','kumar','123q',12323,'fuckyou', {from: accounts[0]})
+                    
+                return contractInstance.publishAContract('akshay','kumar', {from: accounts[0]})
               }).then((result) => {
-                // Get the value from the contract to prove it worked.
-                return contractInstance.showUserContract.call(accounts[0])
+                console.log(result);
+                return contractInstance.showUserContract.call('akshay',accounts[0])
               }).then((result) => {
-                  
                 // Update state with the result.
                 return this.setState({ data: result })
               })
@@ -56,6 +55,7 @@ export default class Contract extends Component{
           }
     
     render(){
+      
         return(
             <div>
                 {this.state.data}
